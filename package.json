@@ -4,10 +4,10 @@
     "description": "mpOTR implementation",
     "repository": {
         "type": "git",
-        "url": "git+https://git.ikrypto.club/superp00t/threejsdemo.git"
+        "url": "git+https://github.com/superp00t/MultiParty.js"
     },
     "author": "Joshua Achorn",
-    "license": "...",
+    "license": "AGPLv3",
     "devDependencies": {
         "crypto-js": "latest",
         "ts-loader": "latest",
