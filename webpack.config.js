@@ -4,7 +4,7 @@ module.exports = {
     entry: './bundler.ts',
     output: {
         path: path.resolve(__dirname, './dist'),  
-        filename: 'MultiParty.js',
+        filename: 'MultiParty.min.js',
         publicPath: '/'
     },
     resolve: {
@@ -19,11 +19,11 @@ module.exports = {
     },
 
     plugins: [
-        // new webpack.DefinePlugin({
-        //     'process.env': {
-        //         NODE_ENV: JSON.stringify('production')
-        //     }
-        // }),
-        // new webpack.optimize.UglifyJsPlugin({ output: {comments: false} })
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({ output: {comments: false} })
     ]
 }
