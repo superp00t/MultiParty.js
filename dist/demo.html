@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="MultiParty.js"></script>
+    <script>
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        var me = new MultiParty("me");
+        var you = new MultiParty("you");
+
+        window.addEventListener("load", () => {
+            var log = function (str) {
+                document.querySelector("#cons").innerHTML += escapeHtml(str) + "\n";
+            }
+
+            log("Me fingerprint " + me.genFingerprint());
+            log("You fingerprint " + you.genFingerprint());
+
+            me.addBuddy("you");
+            you.addBuddy("me");
+
+            var pk = me.sendPublicKey("you");
+            var pk2 = you.sendPublicKey("me");
+
+            log("<me> " + pk);
+            log("<you> " + pk2);
+
+            you.receiveMessage("me", pk);
+            me.receiveMessage("you", pk2);
+
+            var msg = me.sendMessage("hello");
+            log("<me> " + msg);
+            log("<me> " + you.receiveMessage("me", msg));
+        });
+    </script>
+</head>
+<body>
+    <pre style="font-family: monospace;" id="cons">
+</pre>
+</body>
+
+</html>
